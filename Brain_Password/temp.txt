@@ -1,0 +1,242 @@
+/*
+void pixelSpread(int pixelX, int pixelY, Uint8 initialColor_R, Uint8 initialColor_G, Uint8 initialColor_B, Uint8 initialColor_A) {
+	SDL_Color abovePixel, belowPixel, leftPixel, rightPixel;
+	SDL_Rect drawPointRect;
+	drawPointRect.w = 1; 
+	drawPointRect.h = 1;
+	SDL_RenderDrawPoint(render, pixelX, pixelY);
+
+	abovePixel = getPixelColor(pixelX, pixelY + 1);
+	belowPixel = getPixelColor(pixelX, pixelY - 1);
+	leftPixel = getPixelColor(pixelX - 1, pixelY);
+	rightPixel = getPixelColor(pixelX + 1, pixelY);
+
+	if (initialColor_R == abovePixel.r && initialColor_G == abovePixel.g && initialColor_B == abovePixel.b && initialColor_A == abovePixel.a && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		vector<int> pixelCoords = { pixelX, pixelY + 1};
+		drawPointRect.x = pixelX;
+		drawPointRect.y = pixelY + 1;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == belowPixel.r && initialColor_G == belowPixel.g && initialColor_B == belowPixel.b && initialColor_A == belowPixel.a && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		vector<int> pixelCoords = { pixelX, pixelY - 1 };
+		drawPointRect.x = pixelX;
+		drawPointRect.y = pixelY - 1;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == leftPixel.r && initialColor_G == leftPixel.g && initialColor_B == leftPixel.b && initialColor_A == leftPixel.a && pixelX > 0 && pixelX < SCREEN_WIDTH && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		vector<int> pixelCoords = { pixelX - 1, pixelY};
+		drawPointRect.x = pixelX - 1;
+		drawPointRect.y = pixelY;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == rightPixel.r && initialColor_G == rightPixel.g && initialColor_B == rightPixel.b && initialColor_A == rightPixel.a && pixelX > 0 && pixelX < SCREEN_WIDTH && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		vector<int> pixelCoords = { pixelX + 1, pixelY };
+		drawPointRect.x = pixelX + 1;
+		drawPointRect.y = pixelY;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	SDL_UpdateWindowSurface(window);
+}
+
+void fillCanvas(int _x, int _y, int fillColor_R, int fillColor_G, int fillColor_B, int fillColor_A) {
+	getPixel_Surface = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	SDL_RenderReadPixels(render, NULL, SDL_PIXELFORMAT_ARGB8888, getPixel_Surface->pixels, getPixel_Surface->pitch);
+
+	getPixel_bpp = getPixel_Surface->format->BytesPerPixel;
+
+	selectedColor = SDL_MapRGBA(getPixel_Surface->format, selectedColor_R, selectedColor_G, selectedColor_B, selectedColor_A);
+	SDL_SetRenderDrawColor(render, fillColor_R, fillColor_G, fillColor_B, fillColor_A);
+
+	SDL_Color initialPixel = getPixelColor(_x, _y);
+	if (!checkForBar(_y) && initialPixel.r != fillColor_R || initialPixel.g != fillColor_G || initialPixel.b != fillColor_B || initialPixel.a != fillColor_A) {
+		fillZoneList.empty();
+		vector<int> initialPixelCoords = { _x, _y };
+
+		SDL_Rect drawPointRect;
+		drawPointRect.w = 1;
+		drawPointRect.h = 1;
+		drawPointRect.x = _x;
+		drawPointRect.y = _y;
+		SDL_UpdateWindowSurface(window);
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+
+		fillZoneList.push_back(initialPixelCoords);
+		while (fillZoneList.size() > 0) {
+			vector<int> pixelCoords = fillZoneList[0];
+			fillZoneList.erase(fillZoneList.begin());
+			pixelSpread(pixelCoords[0], pixelCoords[1], initialPixel.r, initialPixel.g, initialPixel.b, initialPixel.a);
+		}
+		SDL_RenderPresent(render);
+	}
+}
+*/
+
+
+/*
+void pixelSpread(int pixelX, int pixelY, Uint8 initialColor_R, Uint8 initialColor_G, Uint8 initialColor_B, Uint8 initialColor_A) {
+	SDL_Color abovePixel, belowPixel, leftPixel, rightPixel;
+	SDL_RenderDrawPoint(render, pixelX, pixelY);
+	SDL_Rect drawPointRect;
+	drawPointRect.w = 1;
+	drawPointRect.h = 1;
+	drawPointRect.x = pixelX;
+	drawPointRect.y = pixelY;
+	SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+	SDL_UpdateWindowSurface(window);
+	abovePixel = getPixelColor(pixelX, pixelY + 1);
+	belowPixel = getPixelColor(pixelX, pixelY - 1);
+	leftPixel = getPixelColor(pixelX - 1, pixelY);
+	rightPixel = getPixelColor(pixelX + 1, pixelY);
+
+	if (initialColor_R == abovePixel.r && initialColor_G == abovePixel.g && initialColor_B == abovePixel.b && initialColor_A == abovePixel.a && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelSpread(pixelX, pixelY + 1, initialColor_R, initialColor_G, initialColor_B, initialColor_A);
+	}
+	if (initialColor_R == belowPixel.r && initialColor_G == belowPixel.g && initialColor_B == belowPixel.b && initialColor_A == belowPixel.a && pixelY > taskbarHeight && pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelSpread(pixelX, pixelY - 1, initialColor_R, initialColor_G, initialColor_B, initialColor_A);
+	}
+	if (initialColor_R == leftPixel.r && initialColor_G == leftPixel.g && initialColor_B == leftPixel.b && initialColor_A == leftPixel.a && pixelX > 0 && pixelX < SCREEN_WIDTH) {
+		pixelSpread(pixelX - 1, pixelY, initialColor_R, initialColor_G, initialColor_B, initialColor_A);
+	}
+	if (initialColor_R == rightPixel.r && initialColor_G == rightPixel.g && initialColor_B == rightPixel.b && initialColor_A == rightPixel.a && pixelX > 0 && pixelX < SCREEN_WIDTH) {
+		pixelSpread(pixelX + 1, pixelY, initialColor_R, initialColor_G, initialColor_B, initialColor_A);
+	}
+}
+
+void fillCanvas(int _x, int _y, int fillColor_R, int fillColor_G, int fillColor_B, int fillColor_A) {
+
+	getPixel_Surface = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	SDL_RenderReadPixels(render, NULL, SDL_PIXELFORMAT_ARGB8888, getPixel_Surface->pixels, getPixel_Surface->pitch);
+
+	getPixel_bpp = getPixel_Surface->format->BytesPerPixel;
+	selectedColor = SDL_MapRGBA(getPixel_Surface->format, selectedColor_R, selectedColor_G, selectedColor_B, selectedColor_A);
+
+	SDL_SetRenderDrawColor(render, fillColor_R, fillColor_G, fillColor_B, fillColor_A);
+	SDL_Color initialPixel = getPixelColor(_x, _y);
+
+	if (initialPixel.r != fillColor_R || initialPixel.g != fillColor_G || initialPixel.b != fillColor_B || initialPixel.a != fillColor_A) {
+		pixelSpread(_x, _y, initialPixel.r, initialPixel.g, initialPixel.b, initialPixel.a);
+		SDL_RenderPresent(render);
+	}
+}
+*/
+
+/*
+_____________________________________________________________________
+_____________________________________________________________________
+_____________________________________________________________________
+_____________________________________________________________________
+_____________________________________________________________________
+_____________________________________________________________________
+void pixelSpread(int pixelX, int pixelY, Uint8 initialColor_R, Uint8 initialColor_G, Uint8 initialColor_B, Uint8 initialColor_A) {
+	SDL_Color newPixel, abovePixel, belowPixel, leftPixel, rightPixel;
+	int originalX = pixelX;
+	int originalY = pixelY;
+
+	while (pixelX >= 0 && pixelX <= SCREEN_WIDTH) {
+		newPixel = getPixelColor(pixelX, pixelY);
+		if (initialColor_R != newPixel.r || initialColor_G != newPixel.g || initialColor_B != newPixel.b || initialColor_A != newPixel.a)
+			break;
+
+		int oldPixelY = pixelY;
+		bool top = true;
+		bool below = true;
+		bool left = true;
+		bool right = true;
+		while (checkForBar(pixelY)) {
+			SDL_RenderDrawPoint(render, pixelX, pixelY);
+			abovePixel = getPixelColor(pixelX, pixelY + 1);
+			belowPixel = getPixelColor(pixelX, pixelY - 1);
+			leftPixel = getPixelColor(pixelX - 1, pixelY);
+			rightPixel = getPixelColor(pixelX + 1, pixelY);
+
+			if (top && initialColor_R == abovePixel.r && initialColor_G == abovePixel.g && initialColor_B == abovePixel.b && initialColor_A == abovePixel.a) {
+				SDL_RenderDrawPoint(render, pixelX, pixelY + 1);
+			}
+			else {
+				top = false;
+			}
+			if (below && initialColor_R == belowPixel.r && initialColor_G == belowPixel.g && initialColor_B == belowPixel.b && initialColor_A == belowPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX, pixelY - 1);
+			}
+			else {
+				below = false;
+			}
+			if (left && initialColor_R == leftPixel.r && initialColor_G == leftPixel.g && initialColor_B == leftPixel.b && initialColor_A == leftPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX - 1, pixelY);
+			}
+			else {
+				left = false;
+			}
+			if (right && initialColor_R == rightPixel.r && initialColor_G == rightPixel.g && initialColor_B == rightPixel.b && initialColor_A == rightPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX + 1, pixelY);
+			}
+			else {
+				right = false;
+			}
+			if (!(top && below && left && right)) {
+				break;
+			}
+			pixelY += 1;
+		}
+		pixelY = oldPixelY;
+		pixelX -= 1;
+	}
+
+	pixelX = originalX;
+
+	while (checkForBar(pixelY)) {
+		newPixel = getPixelColor(pixelX, pixelY);
+		if (initialColor_R != newPixel.r || initialColor_G != newPixel.g || initialColor_B != newPixel.b || initialColor_A != newPixel.a)
+			break;
+		int oldPixelX = pixelX;
+		bool top = true;
+		bool below = true;
+		bool left = true;
+		bool right = true;
+		while (pixelX >= 0 && pixelX <= SCREEN_WIDTH) {
+			SDL_RenderDrawPoint(render, pixelX, pixelY);
+			abovePixel = getPixelColor(pixelX, pixelY + 1);
+			belowPixel = getPixelColor(pixelX, pixelY - 1);
+			leftPixel = getPixelColor(pixelX - 1, pixelY);
+			rightPixel = getPixelColor(pixelX + 1, pixelY);
+
+			if (top && initialColor_R == abovePixel.r && initialColor_G == abovePixel.g && initialColor_B == abovePixel.b && initialColor_A == abovePixel.a) {
+				SDL_RenderDrawPoint(render, pixelX, pixelY + 1);
+			}
+			else {
+				top = false;
+			}
+			if (below && initialColor_R == belowPixel.r && initialColor_G == belowPixel.g && initialColor_B == belowPixel.b && initialColor_A == belowPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX, pixelY - 1);
+			}
+			else {
+				below = false;
+			}
+			if (left && initialColor_R == leftPixel.r && initialColor_G == leftPixel.g && initialColor_B == leftPixel.b && initialColor_A == leftPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX - 1, pixelY);
+			}
+			else {
+				left = false;
+			}
+			if (right && initialColor_R == rightPixel.r && initialColor_G == rightPixel.g && initialColor_B == rightPixel.b && initialColor_A == rightPixel.a) {
+				SDL_RenderDrawPoint(render, pixelX + 1, pixelY);
+			}
+			else {
+				right = false;
+			}
+			if (!(top && below && left && right)) {
+				break;
+			}
+			pixelX -= 1;
+		}
+		pixelX = oldPixelX;
+		pixelY += 1;
+	}
+
+	SDL_RenderPresent(render);
+}
+*/

@@ -1,0 +1,28 @@
+if (initialColor_R == abovePixel.r || initialColor_G == abovePixel.g || initialColor_B == abovePixel.b || initialColor_A == abovePixel.a || pixelY > taskbarHeight || pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelCoords = { pixelX, pixelY + 1};
+		drawPointRect.x = pixelX;
+		drawPointRect.y = pixelY + 1;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == belowPixel.r || initialColor_G == belowPixel.g || initialColor_B == belowPixel.b || initialColor_A == belowPixel.a || pixelY > taskbarHeight || pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelCoords = { pixelX, pixelY - 1 };
+		drawPointRect.x = pixelX;
+		drawPointRect.y = pixelY - 1;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == leftPixel.r || initialColor_G == leftPixel.g || initialColor_B == leftPixel.b || initialColor_A == leftPixel.a || pixelX > 0 || pixelX < SCREEN_WIDTH || pixelY > taskbarHeight || pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelCoords = { pixelX - 1, pixelY};
+		drawPointRect.x = pixelX - 1;
+		drawPointRect.y = pixelY;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
+	if (initialColor_R == rightPixel.r || initialColor_G == rightPixel.g || initialColor_B == rightPixel.b || initialColor_A == rightPixel.a || pixelX > 0 || pixelX < SCREEN_WIDTH || pixelY > taskbarHeight || pixelY < SCREEN_HEIGHT - footbarHeight) {
+		pixelCoords = { pixelX + 1, pixelY };
+		drawPointRect.x = pixelX + 1;
+		drawPointRect.y = pixelY;
+		SDL_FillRect(getPixel_Surface, &drawPointRect, selectedColor);
+		fillZoneList.push_back(pixelCoords);
+	}
