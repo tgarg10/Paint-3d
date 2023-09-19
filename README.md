@@ -1,16 +1,16 @@
-Description:
-🧠 Explore the fascinating world of cognitive passwords in this abandoned project inspired by the Nature article "Unlocking the Mind's Secrets" (https://www.nature.com/articles/nature.2012.11357). 🤔
+#🧠 Description:
+Explore the fascinating world of cognitive passwords in this abandoned project inspired by the Nature article "Unlocking the Mind's Secrets" (https://www.nature.com/articles/nature.2012.11357). 🤔
 
-🎮 What Was Planned:
+#🎮 What Was Planned:
 Originally intended as a unique brain-teasing puzzle game, this project aimed to challenge players with brain-powered password puzzles based on the latest research in cognitive neuroscience. Dive into the complexities of memory, pattern recognition, and problem-solving, all while having fun!
 
-🖌️ What Actually Happened:
+#🖌️ What Actually Happened:
 Life is full of unexpected turns, and this project took an intriguing one. Instead of creating a brain password game, I ended up programming a simple paint application in C++ using an old game-building package. While it's not what I initially set out to do, it was a valuable learning experience and a reminder that creativity often leads us in unexpected directions.
 
-🖼️ About the Paint Application:
+#🖼️ About the Paint Application:
 The paint application I created is a basic yet functional tool for unleashing your artistic side. Whether you're a seasoned digital artist or just looking for a way to doodle and have fun, this application provides a canvas for your creativity.
 
-🎨 Features:
+#🎨 Features:
 
 Drawing tools (pencil, brush, eraser)
 Color palette for endless creativity
