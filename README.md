@@ -16,7 +16,9 @@ The paint application I created is a basic yet functional tool for unleashing yo
 + Color palette for endless creativity
 + Save and load your masterpieces
 + A straightforward user interface for easy navigation
-+ 🤷‍♂️ Sometimes, the journey is more important than the destination. While the Brain Password Game may have been shelved for now, this repository stands as a testament to the unpredictable nature of software development. Feel free to explore the code and the paint application, and who knows, you might even be inspired to continue the Brain Password Game project in your own way!
+
+
+🤷‍♂️ Sometimes, the journey is more important than the destination. While the Brain Password Game may have been shelved for now, this repository stands as a testament to the unpredictable nature of software development. Feel free to explore the code and the paint application, and who knows, you might even be inspired to continue the Brain Password Game project in your own way!
 
 🚀 Give it a try and let your imagination run wild with this unexpected twist on my programming journey.
 
